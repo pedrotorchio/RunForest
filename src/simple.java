@@ -33,14 +33,14 @@ import com.mobilerobots.Aria.*;
 
 public class simple {
 
-  // static {
-  //   try {
-  //       System.loadLibrary("AriaJava");
-  //   } catch (UnsatisfiedLinkError e) {
-  //     System.err.println("Native code library libAriaJava failed to load. Make sure that its directory is in your library path; See javaExamples/README.txt and the chapter on Dynamic Linking Problems in the SWIG Java documentation (http://www.swig.org) for help.\n" + e);
-  //     System.exit(1);
-  //   }
-  // }
+  static {
+    try {
+        System.loadLibrary("AriaJava");
+    } catch (UnsatisfiedLinkError e) {
+      System.err.println("Native code library libAriaJava failed to load. Make sure that its directory is in your library path; See javaExamples/README.txt and the chapter on Dynamic Linking Problems in the SWIG Java documentation (http://www.swig.org) for help.\n" + e);
+      System.exit(1);
+    }
+  }
 
   public static void main(String argv[]) {
     String path = System.getProperty("java.library.path");
