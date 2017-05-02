@@ -32,7 +32,7 @@ Adept MobileRobots, 10 Columbia Drive, Amherst, NH 03031; +1-603-881-7960
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
 
-package com.mobilerobots.Aria;
+package vendor.aria;
 
 public class ArRetFunctor1_VoidP_VoidP extends ArRetFunctor_VoidP {
   /* (begin code from javabody_derived typemap) */

@@ -32,7 +32,7 @@ Adept MobileRobots, 10 Columbia Drive, Amherst, NH 03031; +1-603-881-7960
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
 
-package com.mobilerobots.Aria;
+package vendor.aria;
 
 class AriaJavaJNI {
   public final static native long new_ArPoseVector__SWIG_0();
