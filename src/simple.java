@@ -30,6 +30,7 @@ Adept MobileRobots, 10 Columbia Drive, Amherst, NH 03031; +1-603-881-7960
  */
 
 import com.mobilerobots.Aria.*;
+import customRobot.Forrest;
 
 public class simple {
 
@@ -43,13 +44,12 @@ public class simple {
   }
 
   public static void main(String argv[]) {
-    String path = System.getProperty("java.library.path");
-    System.out.println(path);
+
     System.out.println("Starting Java Test");
 
     Aria.init();
 
-    ArRobot robot = new ArRobot();
+    Forrest theRunner = new Forrest();
     ArSimpleConnector conn = new ArSimpleConnector(argv);
 
     if(!Aria.parseArgs())
@@ -63,37 +63,40 @@ public class simple {
       System.err.println("Could not connect to robot, exiting.\n");
       System.exit(1);
     }
-    robot.runAsync(true);
-    robot.lock();
-    System.out.println("Sending command to move forward 1 meter...");
-    robot.enableMotors();
-    robot.move(1000);
-    robot.unlock();
-    System.out.println("Sleeping for 5 seconds...");
-    ArUtil.sleep(5000);
-    robot.lock();
-    System.out.println("Sending command to rotate 90 degrees...");
-    robot.setHeading(90);
-    robot.unlock();
-    System.out.println("Sleeping for 5 seconds...");
-    ArUtil.sleep(5000);
-    robot.lock();
-    System.out.println("Robot coords: robot.getX()=" + robot.getX() + ", robot.getY()=" + robot.getY() + ", robot.getTh()=" + robot.getTh());
-    ArPose p = robot.getPose();
-    System.out.println("               pose.getX()=" + p.getX() +     ", pose.getY()="  + p.getY() +     ",  pose.getTh()=" + p.getTh());
-    double[] xout = {0};
-    double[] yout = {0};
-    double[] thout = {0};
-    p.getPose(xout, yout, thout);
-    System.out.println("              pose.getPose(): x=" + xout[0] + ", y=" + yout[0] + ", th=" + thout[0]);
-    robot.unlock();
-    robot.lock();
-    System.out.println("exiting.");
-    robot.stopRunning(true);
-    robot.unlock();
-    robot.lock();
-    robot.disconnect();
-    robot.unlock();
-    Aria.exit(0);
+
+    theRunner.adiante(300);
+    //
+    // robot.runAsync(true);
+    // robot.lock();
+    // System.out.println("Sending command to move forward 1 meter...");
+    // robot.enableMotors();
+    // robot.move(1000);
+    // robot.unlock();
+    // System.out.println("Sleeping for 5 seconds...");
+    // ArUtil.sleep(5000);
+    // robot.lock();
+    // System.out.println("Sending command to rotate 90 degrees...");
+    // robot.setHeading(90);
+    // robot.unlock();
+    // System.out.println("Sleeping for 5 seconds...");
+    // ArUtil.sleep(5000);
+    // robot.lock();
+    // System.out.println("Robot coords: robot.getX()=" + robot.getX() + ", robot.getY()=" + robot.getY() + ", robot.getTh()=" + robot.getTh());
+    // ArPose p = robot.getPose();
+    // System.out.println("               pose.getX()=" + p.getX() +     ", pose.getY()="  + p.getY() +     ",  pose.getTh()=" + p.getTh());
+    // double[] xout = {0};
+    // double[] yout = {0};
+    // double[] thout = {0};
+    // p.getPose(xout, yout, thout);
+    // System.out.println("              pose.getPose(): x=" + xout[0] + ", y=" + yout[0] + ", th=" + thout[0]);
+    // robot.unlock();
+    // robot.lock();
+    // System.out.println("exiting.");
+    // robot.stopRunning(true);
+    // robot.unlock();
+    // robot.lock();
+    // robot.disconnect();
+    // robot.unlock();
+    // Aria.exit(0);
   }
 }
