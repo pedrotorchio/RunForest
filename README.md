@@ -11,11 +11,11 @@ https://link.springer.com/chapter/10.1007%2F978-1-84882-864-3_2#page-1
 ##### clear build
 build $ rm -r ./*
 ### CWD @ src
-#### compilar simple.java (ou outro arquivo main) na pasta build
-src $ javac -classpath "vendor/Aria.jar;." -d ../build simple.java
+#### compilar RunForest.java (ou outro arquivo main) na pasta build
+src $ javac -classpath "vendor/Aria.jar;." -d ../build RunForest.java
 
 
 ## PARA EXECUTAR
 ### CWD @ build
 #### executar simple.class (ou outro arquivo main) na pasta build
-build $ java -cp "../src/vendor/Aria.jar;." simple
+build $ java -cp "../src/vendor/Aria.jar;." RunForest
