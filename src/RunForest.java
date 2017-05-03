@@ -66,17 +66,15 @@ public class RunForest {
 
       robot.runAsync(true);
       robot.init();
+      robot.log();
+
+      /************ [ MOVIMENTOS ]
+       * avanca (mm)
+       * roda (graus)
+       */
+
 
       robot.avanca(10000);
-
-
-
-    // sleep(1000);
-    // robot.avanca(1000);
-    // sleep(1000);
-    // robot.roda(20);
-    // robot.avanca(1000);
-    // sleep(1000);
-
+      robot.roda(30);
   }
 }

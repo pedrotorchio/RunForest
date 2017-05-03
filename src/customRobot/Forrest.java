@@ -6,14 +6,22 @@ public class Forrest extends ArRobot{
 
   public void init(){
     enableMotors();
+    // velocidade maxima instantania 1m/s
+    setTransAccel(10000);
+    setTransDecel(10000);
+    setRotAccel(10000);
+    setRotDecel(10000);
   }
 
   public String toString(){
     return
       "\n" +
       "Forrest::\n"  +
-      "TransVel: " + getAbsoluteMaxTransVel() + "\n" +
-      "RotatVel: " + getAbsoluteMaxRotVel() + "\n";
+      "MaxVel: " + getAbsoluteMaxTransVel() + "\n" +
+      "MaxRotVel: " + getAbsoluteMaxRotVel() + "\n" +
+      "MaxAccel: " + getTransAccel() + "\n" +
+      "Decel: " + getTransDecel() + "\n" +
+      "MaxRotAccel: " + getAbsoluteMaxRotAccel();
   }
   public void log(){
     System.out.println(this);
@@ -33,7 +41,7 @@ public class Forrest extends ArRobot{
       "Adiante " + distanceMM + "mm."
     );
     move(distanceMM);
-    calmaCara(20000);
+    calmaCara(distanceMM); // dist/vel * 1000
   }
   public void roda(double anguloGrau){
     log(
@@ -42,7 +50,7 @@ public class Forrest extends ArRobot{
       ") graus."
     );
     setDeltaHeading(anguloGrau);
-    calmaCara(3000);
+    calmaCara((int)anguloGrau/20 * 1000); // usando velocidade aproximada
   }
   public void desvia(double anguloFrente){
     double novoAngulo = 0;
