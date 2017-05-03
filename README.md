@@ -1,5 +1,5 @@
 http://robots.mobilerobots.com/docs/api/ARIA/2.9.1/docs/index.html#arCliServ
-
+https://link.springer.com/chapter/10.1007%2F978-1-84882-864-3_2#page-1
 
 ## PARA INSTALAR
 1- Baixar e instalar MobileSim e Aria pra windows
