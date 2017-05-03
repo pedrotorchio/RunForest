@@ -19,9 +19,9 @@ Copyright (C) 2016 Omron Adept Technologies, Inc.
      along with this program; if not, write to the Free Software
      Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-If you wish to redistribute ARIA under different terms, contact 
-Adept MobileRobots for information about a commercial version of ARIA at 
-robots@mobilerobots.com or 
+If you wish to redistribute ARIA under different terms, contact
+Adept MobileRobots for information about a commercial version of ARIA at
+robots@mobilerobots.com or
 Adept MobileRobots, 10 Columbia Drive, Amherst, NH 03031; +1-603-881-7960
 */
 
@@ -49,7 +49,7 @@ public class simple {
 
     ArRobot robot = new ArRobot();
     ArSimpleConnector conn = new ArSimpleConnector(argv);
- 
+
     if(!Aria.parseArgs())
     {
       Aria.logOptions();
@@ -76,7 +76,7 @@ public class simple {
     System.out.println("Sleeping for 5 seconds...");
     ArUtil.sleep(5000);
     robot.lock();
-    System.out.println("Robot coords: robot.getX()=" + robot.getX() + ", robot.getY()=" + robot.getY() + ", robot.getTh()=" + robot.getTh()); 
+    System.out.println("Robot coords: robot.getX()=" + robot.getX() + ", robot.getY()=" + robot.getY() + ", robot.getTh()=" + robot.getTh());
     ArPose p = robot.getPose();
     System.out.println("               pose.getX()=" + p.getX() +     ", pose.getY()="  + p.getY() +     ",  pose.getTh()=" + p.getTh());
     double[] xout = {0};
