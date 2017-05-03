@@ -31,6 +31,7 @@ Adept MobileRobots, 10 Columbia Drive, Amherst, NH 03031; +1-603-881-7960
 
 import com.mobilerobots.Aria.*;
 import customRobot.Forrest;
+import java.util.concurrent.CompletableFuture;
 
 public class RunForest {
 
@@ -62,18 +63,20 @@ public class RunForest {
       System.err.println("Could not connect to robot, exiting.\n");
       System.exit(1);
     }
-    robot.runAsync(true);
-    robot.roda(90);
-    sleep(1000);
-    robot.avanca(1000);
-    sleep(1000);
-    robot.roda(20);
-    robot.avanca(1000);
-    sleep(1000);
-    Aria.exit(0);
-  }
-  public static void sleep(int tempoMS){
-    System.out.println("- " + tempoMS);
-    ArUtil.sleep(tempoMS);
+
+      robot.runAsync(true);
+      robot.init();
+
+      robot.avanca(10000);
+
+
+
+    // sleep(1000);
+    // robot.avanca(1000);
+    // sleep(1000);
+    // robot.roda(20);
+    // robot.avanca(1000);
+    // sleep(1000);
+
   }
 }

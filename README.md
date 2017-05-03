@@ -19,3 +19,11 @@ src $ javac -classpath "vendor/Aria.jar;." -d ../build RunForest.java
 ### CWD @ build
 #### executar simple.class (ou outro arquivo main) na pasta build
 build $ java -cp "../src/vendor/Aria.jar;." RunForest
+
+
+Como chegar do ponto global conhecido (x, y) no ponto global (x',y')
+Movimentos possíveis (até agora, ainda vou tentar implementar mais):
+- Rodar (g graus)
+- Avancar (d milimetros)
+A percepção do robô é um sonar, que funciona assim:
+- Você chama read(g angulo, g' angulo) passando uma faixa de angulos. Ele retorna o obstaculo mais proximo dentro desse intervalo. Ou seja, vc desta angulos pequenos na direcao que quer saber se tem um obstaculo e ele diz a distancia, mas nao diz o angulo exato
