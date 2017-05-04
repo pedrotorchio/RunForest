@@ -21,6 +21,10 @@ public class Forrest extends ArRobot{
   public void moveTo(double x, double y, double th){
     moveTo(new ArPose(x, y, th));
   }
+  public void moveTo(ArPose pose){
+    log("Movendo para " + pose.getX() + ", " + pose.getY() + " " + pose.getTh());
+    super.moveTo(pose);
+  }
 
   public String toString(){
     ArPose coords = getPose();
