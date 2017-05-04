@@ -1,27 +1,32 @@
 package customRobot;
 import com.mobilerobots.Aria.*;
+import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
 public class Forrest extends ArRobot{
 
+  ArrayList<iAction> acoes = new ArrayList<iAction>();
+
   public void init(){
     enableMotors();
     // velocidade maxima instantania 1m/s
-    setTransAccel(10000);
-    setTransDecel(10000);
-    setRotAccel(10000);
-    setRotDecel(10000);
+    setTransAccel(9999);
+    setTransDecel(9999);
+    setRotAccel(9999);
+    setRotDecel(9999);
+  }
+  public void moveTo(double x, double y){
+    moveTo(x, y, 0);
+  }
+  public void moveTo(double x, double y, double th){
+    moveTo(new ArPose(x, y, th));
   }
 
   public String toString(){
+    ArPose coords = getPose();
     return
       "\n" +
-      "Forrest::\n"  +
-      "MaxVel: " + getAbsoluteMaxTransVel() + "\n" +
-      "MaxRotVel: " + getAbsoluteMaxRotVel() + "\n" +
-      "MaxAccel: " + getTransAccel() + "\n" +
-      "Decel: " + getTransDecel() + "\n" +
-      "MaxRotAccel: " + getAbsoluteMaxRotAccel();
+      "Forrest:: (" + coords.getX() + ", " + coords.getY() + "), " + coords.getTh() + " graus\n";
   }
   public void log(){
     System.out.println(this);
@@ -40,8 +45,9 @@ public class Forrest extends ArRobot{
     log(
       "Adiante " + distanceMM + "mm."
     );
+
     move(distanceMM);
-    calmaCara(distanceMM); // dist/vel * 1000
+    calmaCara((int)(distanceMM * 2)); // dist/vel * 1000
   }
   public void roda(double anguloGrau){
     log(
@@ -50,7 +56,7 @@ public class Forrest extends ArRobot{
       ") graus."
     );
     setDeltaHeading(anguloGrau);
-    calmaCara((int)anguloGrau/20 * 1000); // usando velocidade aproximada
+    calmaCara((int)(anguloGrau * 80)); // usando velocidade aproximada 5deg/s
   }
   public void desvia(double anguloFrente){
     double novoAngulo = 0;
@@ -68,10 +74,16 @@ public class Forrest extends ArRobot{
   }
 
   public void calmaCara(int tempoMS){
+    if(tempoMS < 0)
+      tempoMS = -1 * tempoMS;
     ArUtil.sleep(tempoMS);
   }
+
   public static void sleep(int tempoMS){
+    if(tempoMS < 0)
+      tempoMS = -1 * tempoMS;
     System.out.println("- " + tempoMS + " zZz..");
     ArUtil.sleep(tempoMS);
   }
+
 }

@@ -1,40 +1,11 @@
-/*
-Adept MobileRobots Robotics Interface for Applications (ARIA)
-Copyright (C) 2004-2005 ActivMedia Robotics LLC
-Copyright (C) 2006-2010 MobileRobots Inc.
-Copyright (C) 2011-2015 Adept Technology, Inc.
-Copyright (C) 2016 Omron Adept Technologies, Inc.
-
-     This program is free software; you can redistribute it and/or modify
-     it under the terms of the GNU General Public License as published by
-     the Free Software Foundation; either version 2 of the License, or
-     (at your option) any later version.
-
-     This program is distributed in the hope that it will be useful,
-     but WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     GNU General Public License for more details.
-
-     You should have received a copy of the GNU General Public License
-     along with this program; if not, write to the Free Software
-     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-If you wish to redistribute ARIA under different terms, contact
-Adept MobileRobots for information about a commercial version of ARIA at
-robots@mobilerobots.com or
-Adept MobileRobots, 10 Columbia Drive, Amherst, NH 03031; +1-603-881-7960
-*/
-
-/* A simple example of connecting to and driving the robot with direct
- * motion commands.
- */
 
 import com.mobilerobots.Aria.*;
-import customRobot.Forrest;
-import java.util.concurrent.CompletableFuture;
+import customRobot.*;
+import actions.*;
 
 public class RunForest {
-
+  static Forrest robot;
+  static ArPose OBJ;
   static {
     try {
         System.loadLibrary("AriaJava");
@@ -49,7 +20,9 @@ public class RunForest {
 
     Aria.init();
 
-    Forrest robot = new Forrest();
+    // Forrest robot = new Forrest();
+    robot = new Forrest();
+
     ArSimpleConnector conn = new ArSimpleConnector(argv);
 
     if(!Aria.parseArgs())
@@ -66,15 +39,74 @@ public class RunForest {
 
       robot.runAsync(true);
       robot.init();
-      robot.log();
 
+      ArSonarDevice sonar = new ArSonarDevice();
+      robot.addRangeDevice(sonar);
+      /************ [ ENTRADA ] */
+      OBJ = getObjetivo();
+      robot.moveTo(
+        getOrigem()
+      );
+      ArUtil.sleep(1000);
+
+      // robot.addAction(new ArActionBumpers(), 100);
+      // robot.addAction(new ArActionAvoidSide(), 90);
+      // robot.addAction(new SeekNDestroyAction(objetivo), 80);
+
+      // robot.log();
       /************ [ MOVIMENTOS ]
        * avanca (mm)
        * roda (graus)
        */
 
+      robot.avanca(1600);
+      robot.roda(90);
+      robot.avanca(7000);
+      robot.roda(90);
+      robot.avanca(1600);
+      robot.roda(-90);
+      robot.avanca(3000);
 
-      robot.avanca(10000);
-      robot.roda(30);
+      // go();
+
+      robot.log();
+      robot.run(true);
+      // ArUtil.sleep(60000);
+      Aria.exit(0);
   }
+  public static void go(){
+    while(!loop());
+  }
+  public static boolean loop(){
+    ArRangeDevice sonar = robot.findRangeDevice("sonar");
+    ArPose cur = robot.getPose();
+
+    double obj_ang;
+    double obj_dis = robot.findDistanceTo(OBJ);
+
+    for(int i = 100 ; i > 0 ; i--){
+      obj_ang =  robot.findDeltaHeadingTo(OBJ);
+      robot.roda(obj_ang);
+      // robot.avanca(100);
+    }
+
+
+
+    return reached();
+  }
+  public static boolean reached(){
+    ArPose cur = robot.getPose();
+    return (
+      cur.getX() < OBJ.getX() &&
+      cur.getY() > OBJ.getY()
+    );
+  }
+
+  public static ArPose getOrigem(){
+    return new ArPose(0, 10, 0);
+  }
+  public static ArPose getObjetivo(){
+    return new ArPose(0, 0);
+  }
+
 }
